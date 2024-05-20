@@ -3,15 +3,16 @@ import Slider from "@/componenets/Slider";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const storedDarkMode = localStorage.getItem("darkMode");
-  const [darkMode, setDarkMode] = useState(
-    storedDarkMode ? JSON.parse(storedDarkMode) : false
-  );
+  const [darkMode, setDarkMode] = useState(false);
+  // const storedDarkMode = localStorage.getItem("darkMode");
+  // const [darkMode, setDarkMode] = useState(
+  //   storedDarkMode ? JSON.parse(storedDarkMode) : false
+  // );
 
   // Update local storage when dark mode changes
-  useEffect(() => {
-    localStorage.setItem("darkMode", JSON.stringify(darkMode));
-  }, [darkMode]);
+  // useEffect(() => {
+  //   localStorage.setItem("darkMode", JSON.stringify(darkMode));
+  // }, [darkMode]);
 
   return (
     <div className={` ${darkMode ? "dark" : ""} `}>
