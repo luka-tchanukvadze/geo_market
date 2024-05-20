@@ -1,113 +1,224 @@
-import Image from "next/image";
+"use client";
+import Slider from "@/componenets/Slider";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const storedDarkMode = localStorage.getItem("darkMode");
+  const [darkMode, setDarkMode] = useState(
+    storedDarkMode ? JSON.parse(storedDarkMode) : false
+  );
+
+  // Update local storage when dark mode changes
+  useEffect(() => {
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
+  }, [darkMode]);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <div className={` ${darkMode ? "dark" : ""} `}>
+      <div className="bg-white dark:bg-black">
+        <header className="bg-blue-600 dark:bg-purple-600 text-white dark:text-white p-6 shadow-lg">
+          <div className="container mx-auto text-center md:text-left">
+            <h1 className="text-4xl font-extrabold">Small Market</h1>
+            <p className="mt-2">
+              Contact: 123 Market Street, City, Country | Phone: (123) 456-7890
+              | Email: info@smallmarket.com
+            </p>
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className="mt-4 px-4 py-2 bg-gray-900 text-white dark:bg-gray-300 dark:text-black rounded"
+            >
+              Toggle Dark Mode
+            </button>
+          </div>
+        </header>
+
+        <main className="bg-white dark:bg-gray-900 text-black dark:text-white container mx-auto my-12 space-y-12 p-4 md:p-0 rounded-lg shadow-lg">
+          <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <h2 className="text-3xl font-semibold mb-4 text-center">
+              Introduction
+            </h2>
+            <p className="text-gray-700 dark:text-gray-300 text-lg">
+              Welcome to Small Market! Our mission is to provide high-quality
+              products at affordable prices while offering excellent customer
+              service and fostering a friendly community atmosphere.
+            </p>
+          </section>
+
+          <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <h2 className="text-3xl font-semibold mb-4 text-center">
+              Photo Slider
+            </h2>
+            <Slider />
+          </section>
+
+          <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <h2 className="text-3xl font-semibold mb-4 text-center">
+              Employee Roles and Responsibilities
+            </h2>
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-2xl font-semibold">Management</h3>
+                <ul className="list-disc list-inside ml-4 mt-2 text-gray-700 dark:text-gray-300">
+                  <li>
+                    <strong>Store Manager</strong>: Oversees overall operations,
+                    manages staff, handles customer complaints, maintains
+                    inventory, and ensures the store meets financial goals.
+                  </li>
+                  <li>
+                    <strong>Assistant Manager</strong>: Supports the store
+                    manager, supervises staff, assists with scheduling, and
+                    manages day-to-day activities.
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-semibold">
+                  Sales and Customer Service
+                </h3>
+                <ul className="list-disc list-inside ml-4 mt-2 text-gray-700 dark:text-gray-300">
+                  <li>
+                    <strong>Cashier</strong>: Handles transactions, processes
+                    payments, provides customer service, and maintains the
+                    checkout area.
+                  </li>
+                  <li>
+                    <strong>Customer Service Representative</strong>: Assists
+                    customers with inquiries, helps resolve issues, and provides
+                    information about products and services.
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-semibold">Stock and Inventory</h3>
+                <ul className="list-disc list-inside ml-4 mt-2 text-gray-700 dark:text-gray-300">
+                  <li>
+                    <strong>Stock Clerk</strong>: Receives and organizes
+                    inventory, stocks shelves, maintains stock levels, and
+                    ensures products are correctly priced.
+                  </li>
+                  <li>
+                    <strong>Inventory Manager</strong>: Monitors inventory
+                    levels, orders new stock, manages stockroom, and conducts
+                    regular inventory audits.
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-semibold">
+                  Maintenance and Cleaning
+                </h3>
+                <ul className="list-disc list-inside ml-4 mt-2 text-gray-700 dark:text-gray-300">
+                  <li>
+                    <strong>Janitor/Cleaning Staff</strong>: Keeps the store
+                    clean and sanitary, handles waste management, and ensures
+                    all areas are well-maintained.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <h2 className="text-3xl font-semibold mb-4 text-center">
+              Key Policies and Procedures
+            </h2>
+            <ul className="list-disc list-inside ml-4 text-gray-700 dark:text-gray-300">
+              <li>
+                <strong>Customer Service Policy</strong>: Guidelines for
+                interacting with customers, handling complaints, and ensuring a
+                positive shopping experience.
+              </li>
+              <li>
+                <strong>Safety Procedures</strong>: Health and safety
+                regulations, emergency protocols, and employee responsibilities
+                in maintaining a safe environment.
+              </li>
+              <li>
+                <strong>Employee Conduct</strong>: Code of conduct, dress code,
+                and behavioral expectations.
+              </li>
+            </ul>
+          </section>
+
+          <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <h2 className="text-3xl font-semibold mb-4 text-center">
+              Contact Information for Staff
+            </h2>
+            <ul className="list-disc list-inside ml-4 text-gray-700 dark:text-gray-300">
+              <li>
+                <strong>Key Contacts</strong>:
+                <ul className="mt-2 ml-4">
+                  <li>Store Manager: John Doe - john.doe@smallmarket.com</li>
+                  <li>
+                    Assistant Manager: Jane Smith - jane.smith@smallmarket.com
+                  </li>
+                  <li>
+                    Inventory Manager: Alice Johnson -
+                    alice.johnson@smallmarket.com
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <h2 className="text-3xl font-semibold mb-4 text-center">
+              Important Dates and Schedules
+            </h2>
+            <ul className="list-disc list-inside ml-4 text-gray-700 dark:text-gray-300">
+              <li>
+                <strong>Store Hours</strong>:
+                <ul className="mt-2 ml-4">
+                  <li>Monday - Friday: 8:00 AM - 8:00 PM</li>
+                  <li>Saturday: 9:00 AM - 6:00 PM</li>
+                  <li>Sunday: 10:00 AM - 4:00 PM</li>
+                </ul>
+              </li>
+              <li className="mt-2">
+                <strong>Shift Schedules</strong>: Overview of employee shifts
+                and key work hours.
+              </li>
+              <li
+                className="
+mt-2"
+              >
+                <strong>Meeting and Training Sessions</strong>: Dates and times
+                for staff meetings and training sessions.
+              </li>
+            </ul>
+          </section>
+
+          <section className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <h2 className="text-3xl font-semibold mb-4 text-center">
+              Additional Information
+            </h2>
+            <ul className="list-disc list-inside ml-4 text-gray-700 dark:text-gray-300">
+              <li>
+                <strong>Employee Benefits</strong>: Brief overview of employee
+                benefits (e.g., discounts, health benefits, vacation policy).
+              </li>
+              <li className="mt-2">
+                <strong>Career Development</strong>: Opportunities for
+                advancement, training programs, and professional development
+                resources.
+              </li>
+            </ul>
+          </section>
+        </main>
+
+        <footer className="bg-blue-600 dark:bg-purple-600 text-white dark:text-white p-6 mt-12 shadow-lg">
+          <div className="container mx-auto text-center">
+            <p>
+              &copy; 2024 Small Market. All rights reserved. This document is
+              proprietary and cannot be copied or distributed without
+              permission.
+            </p>
+          </div>
+        </footer>
       </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
 }
